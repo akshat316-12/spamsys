@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpamSys</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <span class="brand-name">SpamSys</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="body">
+            <p class="label">Paste a message</p>
+            <form method="POST">
+                <textarea 
+                    name="message" 
+                    placeholder="Type or paste any message here...">{% if message %}{{ message }}{% endif %}</textarea>
+
+                <div class="actions">
+                    <button type="submit" class="btn-primary">Analyze →</button>
+                    <button type="button" class="btn-secondary" onclick="document.querySelector('textarea').value=''">Clear</button>
+                </div>
+            </form>
+
+            {% if result %}
+                <div class="result {% if 'Not' in result %}ham{% else %}spam{% endif %}">
+                    <div class="icon">{% if 'Not' in result %}✓{% else %}✕{% endif %}</div>
+                        <div>
+                            <p class="result-label">Prediction</p>
+                            <p class="result-value">{{ result }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
