@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Check | SpamSys</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <span class="brand-name">SpamSys</span>
+        </div>
+        <nav class="page-nav" aria-label="Classifier">
+            <a class="nav-link" href="/">SMS</a>
+            <a class="nav-link active" href="/email" aria-current="page">Email</a>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="body email-body">
+            <h1 class="page-title">Email spam check</h1>
+            <form method="POST" action="{{ url_for('email_page') }}">
+                <label class="label" for="subject">Subject</label>
+                <input
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    maxlength="500"
+                    value="{{ subject }}"
+                    placeholder="Email subject">
+
+                <label class="label body-label" for="email-body">Email body</label>
+                <textarea
+                    id="email-body"
+                    name="body"
+                    placeholder="Paste the email text here...">{{ body }}</textarea>
+
+                <div class="actions">
+                    <button type="submit" class="btn-primary">Analyze →</button>
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        onclick="window.location.href='/email'">Clear</button>
+                </div>
+            </form>
+
+            {% if error %}
+                <p class="form-error" role="alert">{{ error }}</p>
+            {% endif %}
+
+            {% if result %}
+                <div class="result {% if result == 'Not spam' %}ham{% else %}spam{% endif %}" role="status">
+                    <div class="icon">{% if result == 'Not spam' %}✓{% else %}✕{% endif %}</div>
+                    <div>
+                        <p class="result-label">Prediction</p>
+                        <p class="result-value">{{ result }}</p>
+                        <p class="result-confidence">Spam likelihood: {{ '%.1f'|format(spam_probability * 100) }}%</p>
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+</body>
+</html>

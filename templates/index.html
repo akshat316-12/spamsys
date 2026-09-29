@@ -13,6 +13,10 @@
             <div class="brand-icon">S</div>
             <span class="brand-name">SpamSys</span>
         </div>
+        <nav class="page-nav" aria-label="Classifier">
+            <a class="nav-link" href="/">SMS</a>
+            <a class="nav-link" href="/email">Email</a>
+        </nav>
     </div>
 
     <div class="container">
@@ -28,6 +32,10 @@
                     <button type="button" class="btn-secondary" onclick="document.querySelector('textarea').value=''">Clear</button>
                 </div>
             </form>
+
+            {% if error %}
+                <p class="form-error" role="alert">{{ error }}</p>
+            {% endif %}
 
             {% if result %}
                 <div class="result {% if 'Not' in result %}ham{% else %}spam{% endif %}">
