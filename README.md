@@ -31,19 +31,24 @@ Paste any SMS message and SpamSys will predict in real time whether it's **Spam*
 ---
 
 ## Project Structure
-```
+
+```text
 spamsys/
-├── app.py              ← Flask server
-├── model.pkl           ← Trained Naive Bayes model
-├── vectorizer.pkl      ← TF-IDF vectorizer
-├── Procfile            ← Railway deployment config
-├── requirements.txt    ← Dependencies
+├── app.py                  ← Flask server
+├── model.pkl               ← Trained SMS Naive Bayes model
+├── vectorizer.pkl          ← SMS TF-IDF vectorizer
+├── email_model.pkl         ← Trained Email Naive Bayes model
+├── email_vectorizer.pkl    ← Email TF-IDF vectorizer
+├── Procfile                ← Railway deployment config
+├── requirements.txt        ← Dependencies
 ├── templates/
-│   └── index.html      ← Web interface
+│   ├── index.html          ← SMS web interface
+│   └── email.html          ← Email web interface
 ├── static/
-│   └── style.css       ← Styling
+│   └── style.css           ← Styling
 └── notebook/
-    └── train.ipynb     ← Model training notebook
+    ├── train.ipynb         ← SMS model training
+    └── train_email.ipynb   ← Email model training
 ```
 
 ---
@@ -60,8 +65,17 @@ Then open http://127.0.0.1:5000
 ---
 
 ## How it works
-1. User pastes a message into the web form
+
+### SMS Classification
+1. User pastes an SMS message into the web form
 2. Flask receives the message
-3. TF-IDF vectorizer converts text to numbers
-4. Naive Bayes model predicts spam or not
+3. TF-IDF vectorizer converts the text into numerical features
+4. Naive Bayes model predicts **Spam** or **Not Spam**
+5. Result is displayed instantly
+
+### Email Classification
+1. User pastes email content into the web form
+2. Flask receives the email
+3. TF-IDF vectorizer converts the email text into numerical features
+4. Naive Bayes model predicts **Spam** or **Not Spam**
 5. Result is displayed instantly
