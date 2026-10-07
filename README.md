@@ -1,17 +1,22 @@
 # SpamSys 🛡️
 
-A machine learning web app that detects whether a message is spam or not — instantly.
+A machine learning web app that detects whether an **SMS message or email** is **Spam** or **Not Spam** — instantly.
 
 🔗 **Live Demo:** https://web-production-23158.up.railway.app
 
 ---
 
 ## What it does
-Paste any SMS message and SpamSys will predict in real time whether it's **Spam** or **Not Spam**.
+
+SpamSys can classify both **SMS messages and emails** as **Spam** or **Not Spam** in real time.
+
+- 📱 **SMS:** Enter any SMS message and SpamSys predicts whether it's Spam or Not Spam.
+- 📧 **Email:** Enter email content and SpamSys predicts whether it's Spam or Not Spam.
 
 ---
 
 ## Tech Stack
+
 | Layer | Tool |
 |---|---|
 | Model | Naive Bayes |
@@ -24,9 +29,18 @@ Paste any SMS message and SpamSys will predict in real time whether it's **Spam*
 ---
 
 ## Model Performance
+
+### SMS Spam Classifier
+
 - **Accuracy:** 96.2%
 - **Dataset:** SMS Spam Collection (5,169 messages) from Kaggle
-- **False Positives:** 0 (never marks real messages as spam)
+- **Classification:** Spam / Not Spam
+
+### Email Spam Classifier
+
+- **Accuracy:** 93.24%
+- **Dataset:** SpamAssassin Public Corpus (3,052 emails)
+- **Classification:** Spam / Not Spam
 
 ---
 
